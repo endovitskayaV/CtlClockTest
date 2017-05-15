@@ -16,12 +16,17 @@ namespace CtlClockLibrary
         private WatchPatterns.Watch watch;
         private Graphics graphics;
         private System.Timers.Timer timer;
-        private bool drawing = false;
+        private bool isDrawing = false;
 
-        public enum ClockMode { Analog, Digital };
-        private ClockMode mode;// = ClockMode.Analog;
-        private int timeOffset;// = 0;
+        public enum ClockMode {Digital,Analog};
+        private ClockMode mode;
+        private int timeOffset;
+        private bool stopped;
+        private Color bgColor;
 
+        [Category("Внешний вид")]
+        [Description("Тип представления часов")]
+        [DefaultValue(ClockMode.Digital)]
         public ClockMode Mode
         {
             get
@@ -38,6 +43,9 @@ namespace CtlClockLibrary
             }
         }
 
+        [Category("Поведение")]
+        [Description("Смещение для отображаемого времени относительно системного")]
+        [DefaultValue(3)]
         public int TimeOffset
         {
             get
@@ -49,6 +57,41 @@ namespace CtlClockLibrary
                 timeOffset = value;
                 watch.Time = new TimeSpan(value, 0, 0);
                 Invalidate();
+            }
+        }
+        [Category("Поведение")]
+        [Description("Остановлен ли элемент")]
+        [DefaultValue(false)]
+        public bool Stopped
+        {
+            get
+            {
+                return stopped;
+            }
+            set
+            {
+               stopped = value;
+               isDrawing = value;
+                if (value) timer.Stop(); else timer.Start();
+            }
+        }
+
+
+       // private const Color color = Color.Yellow;
+        [Category("Внешний вид")]
+        [Description("Фоновый цвет компонента")]
+        //[DefaultValue (color)]
+
+        public new Color BackColor
+        {
+            get
+            {
+                return base.BackColor;
+            }
+            set
+            {
+                base.BackColor = value;
+                bgColor = value;
             }
         }
 
@@ -81,23 +124,33 @@ namespace CtlClockLibrary
 
         protected override void OnPaint(PaintEventArgs cl)
         {
-            Draw();
-            base.OnPaint(cl);
+            Draw ();
+           // base.OnPaint(cl);
         }
 
         private void Draw()
         {
-            if (!drawing)
+            if (!isDrawing) // if isDrawing==false // если не рисуется, то можно рисовать
             {
-                drawing = true;
+                isDrawing = true;
                 if (mode.Equals(ClockMode.Analog)) clock = new WatchPatterns.AnologTimeDecorator();
                 else clock = new WatchPatterns.DigitalTimeDecorator();
                 clock.SetWatch(watch);
-                graphics.Clear(Color.White);
+                graphics.Clear(bgColor);
                 clock.Draw(graphics);
-                drawing = false;
+                isDrawing = false;
+            }
+            if (stopped)
+            {
+                if (mode.Equals(ClockMode.Analog)) clock = new WatchPatterns.AnologTimeDecorator();
+                else clock = new WatchPatterns.DigitalTimeDecorator();
+                clock.SetWatch(watch);
+                graphics.Clear(bgColor);
+                clock.Draw(graphics);
             }
         }
+
+        
 
     }
 }

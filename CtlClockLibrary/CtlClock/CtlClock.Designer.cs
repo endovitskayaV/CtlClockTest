@@ -94,8 +94,10 @@
             // pictureBox
             // 
             this.pictureBox.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(326, 288);
+            this.pictureBox.Size = new System.Drawing.Size(265, 180);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 1;
             this.pictureBox.TabStop = false;
             // 
@@ -106,7 +108,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.pictureBox);
             this.Name = "CtlClock";
-            this.Size = new System.Drawing.Size(349, 308);
+            this.Size = new System.Drawing.Size(285, 196);
             this.OptionsMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);

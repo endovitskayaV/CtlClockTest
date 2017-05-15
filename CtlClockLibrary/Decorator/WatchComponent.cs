@@ -13,6 +13,11 @@ namespace WatchPatterns
         private TimeSpan time;
         private TimeSpan timeOffset;
 
+        public  WatchComponent()
+        {
+            timeOffset = new TimeSpan(0, 0, 0);
+        }
+
         public TimeSpan Time
         {
             get
@@ -28,14 +33,7 @@ namespace WatchPatterns
             }
         }
 
-       /* public DateTime Date
-        {
-            get
-            {
-                return DateTime.Today;
-            }
-        }
-        */
+       
         public abstract void Draw(Graphics graphTime);
     }
 }

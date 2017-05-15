@@ -34,10 +34,10 @@
             // ctlClock1
             // 
             this.ctlClock1.BackColor = System.Drawing.Color.White;
-            this.ctlClock1.Location = new System.Drawing.Point(54, 52);
-            this.ctlClock1.Mode = CtlClockLibrary.CtlClock.ClockMode.Digital;
+            this.ctlClock1.Location = new System.Drawing.Point(44, 50);
             this.ctlClock1.Name = "ctlClock1";
-            this.ctlClock1.Size = new System.Drawing.Size(349, 308);
+            this.ctlClock1.Size = new System.Drawing.Size(285, 196);
+            this.ctlClock1.Stopped = true;
             this.ctlClock1.TabIndex = 0;
             this.ctlClock1.TimeOffset = 0;
             // 
