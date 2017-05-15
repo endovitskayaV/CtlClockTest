@@ -12,13 +12,15 @@ namespace CtlClockLibrary
 {
     public partial class CtlClock: UserControl
     {
-        public enum ClockMode { Analog, Digital };
-        private ClockMode mode = ClockMode.Analog;
         private WatchPatterns.TimeDecorator clock;
         private WatchPatterns.Watch watch;
         private Graphics graphics;
         private System.Timers.Timer timer;
         private bool drawing = false;
+
+        public enum ClockMode { Analog, Digital };
+        private ClockMode mode;// = ClockMode.Analog;
+        private int timeOffset;// = 0;
 
         public ClockMode Mode
         {
@@ -36,6 +38,19 @@ namespace CtlClockLibrary
             }
         }
 
+        public int TimeOffset
+        {
+            get
+            {
+                return timeOffset;
+            }
+            set
+            {
+                timeOffset = value;
+                watch.Time = new TimeSpan(value, 0, 0);
+                Invalidate();
+            }
+        }
 
         public CtlClock()
         {

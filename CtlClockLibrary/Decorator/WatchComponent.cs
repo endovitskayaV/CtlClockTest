@@ -10,11 +10,21 @@ namespace WatchPatterns
 {
     public abstract class WatchComponent
     {
+        private TimeSpan time;
+        private TimeSpan timeOffset;
+
         public TimeSpan Time
         {
             get
             {
-                return DateTime.Now.TimeOfDay;
+                return DateTime.Now.TimeOfDay.Add(timeOffset);
+            }
+
+            set
+            {
+                time = DateTime.Now.TimeOfDay.Add(value);
+                timeOffset = value;
+
             }
         }
 
