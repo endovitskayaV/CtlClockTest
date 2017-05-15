@@ -35,17 +35,17 @@
             // ctlClock1
             // 
             this.ctlClock1.BackColor = System.Drawing.Color.White;
-            this.ctlClock1.Location = new System.Drawing.Point(53, 42);
+            this.ctlClock1.Location = new System.Drawing.Point(13, 3);
             this.ctlClock1.Name = "ctlClock1";
-            this.ctlClock1.Size = new System.Drawing.Size(219, 127);
+            this.ctlClock1.Size = new System.Drawing.Size(129, 58);
             this.ctlClock1.TabIndex = 0;
             // 
             // ctlClock2
             // 
             this.ctlClock2.BackColor = System.Drawing.Color.White;
-            this.ctlClock2.Location = new System.Drawing.Point(53, 142);
+            this.ctlClock2.Location = new System.Drawing.Point(34, 97);
             this.ctlClock2.Name = "ctlClock2";
-            this.ctlClock2.Size = new System.Drawing.Size(168, 84);
+            this.ctlClock2.Size = new System.Drawing.Size(117, 39);
             this.ctlClock2.TabIndex = 1;
             // 
             // Form1

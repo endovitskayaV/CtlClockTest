@@ -10,7 +10,7 @@ namespace WatchPatterns
 {
     class AnologTimeDecorator : TimeDecorator
     {
-        public override void Draw(Label lb, Graphics graphTime)
+        public override void Draw(Graphics graphTime)
         {
             Bitmap bitmap = new Bitmap(150, 150);
             Graphics grBuffer = Graphics.FromImage(bitmap);
@@ -23,7 +23,7 @@ namespace WatchPatterns
             grBuffer.DrawLine(new Pen(Brushes.Black, 3), 75, 75, (float)( 35*Math.Sin(h) +75), (float)(35* Math.Cos(h)*(-1)  + 75));
             graphTime.DrawImage(bitmap, 0, 0);
             grBuffer.Dispose();
-            base.Draw(lb, graphTime);
+           // base.Draw(lb, graphTime);
         }
     }
 }

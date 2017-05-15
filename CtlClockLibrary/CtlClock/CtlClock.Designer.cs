@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.dateLbl = new System.Windows.Forms.Label();
             this.OptionsMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.modeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addSpanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,14 +40,6 @@
             this.OptionsMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dateLbl
-            // 
-            this.dateLbl.AutoSize = true;
-            this.dateLbl.Location = new System.Drawing.Point(1, 1);
-            this.dateLbl.Name = "dateLbl";
-            this.dateLbl.Size = new System.Drawing.Size(0, 13);
-            this.dateLbl.TabIndex = 0;
             // 
             // OptionsMenuStrip
             // 
@@ -102,9 +93,9 @@
             // 
             // pictureBox
             // 
-            this.pictureBox.Location = new System.Drawing.Point(3, 47);
+            this.pictureBox.Location = new System.Drawing.Point(0, 0);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(268, 80);
+            this.pictureBox.Size = new System.Drawing.Size(172, 80);
             this.pictureBox.TabIndex = 1;
             this.pictureBox.TabStop = false;
             // 
@@ -114,19 +105,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.pictureBox);
-            this.Controls.Add(this.dateLbl);
             this.Name = "CtlClock";
-            this.Size = new System.Drawing.Size(291, 172);
+            this.Size = new System.Drawing.Size(173, 81);
             this.OptionsMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label dateLbl;
         private System.Windows.Forms.ContextMenuStrip OptionsMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem modeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addSpanToolStripMenuItem;

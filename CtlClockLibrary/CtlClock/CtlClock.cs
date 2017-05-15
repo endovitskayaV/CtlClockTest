@@ -67,7 +67,7 @@ namespace CtlClockLibrary
                 drawing = true;
                 clock.SetWatch(watch);
                 graphics.Clear(Color.White);
-                clock.Draw(dateLbl, graphics);
+                clock.Draw(graphics);
                 drawing = false;
             }
         }

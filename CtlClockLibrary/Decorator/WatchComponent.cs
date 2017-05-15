@@ -18,14 +18,14 @@ namespace WatchPatterns
             }
         }
 
-        public DateTime Date
+       /* public DateTime Date
         {
             get
             {
                 return DateTime.Today;
             }
         }
-
-        public abstract void Draw(Label lb, Graphics graphTime);
+        */
+        public abstract void Draw(Graphics graphTime);
     }
 }

@@ -24,16 +24,16 @@ namespace WatchPatterns
             timer.Enabled = true;
             timer.Start();
         }
-        public override void Draw(Label dL, Graphics graphTime)
+        public override void Draw(Graphics graphTime)
         {
-            DrawDate(dL);
+           // DrawDate(dL);
         }
 
-        private void DrawDate(Label dL)
+       /* private void DrawDate(Label dL)
         {
             dL.Text = Date.ToString("d");         
         }
-
+        */
         public void AddObserver(IObserver observer)
         {
             observers.Add(observer);

@@ -17,10 +17,10 @@ namespace WatchPatterns
             this.watch = w;
         }
 
-        public override void Draw(Label lbDate, Graphics graphTime)
+        public override void Draw( Graphics graphTime)
         {
             if (this.watch != null)
-                watch.Draw(lbDate, graphTime);
+                watch.Draw(graphTime);
         }
     }
 }
