@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26430.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtlClockTest", "CtlClockTest\CtlClockTest.csproj", "{64D1081C-FA06-41EE-8293-433AFA05DD67}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtlClockLibrary", "CtlClockLibrary\CtlClockLibrary.csproj", "{4411DC38-DEAB-41F6-96AD-4BD501F95CF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{64D1081C-FA06-41EE-8293-433AFA05DD67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64D1081C-FA06-41EE-8293-433AFA05DD67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64D1081C-FA06-41EE-8293-433AFA05DD67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4411DC38-DEAB-41F6-96AD-4BD501F95CF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4411DC38-DEAB-41F6-96AD-4BD501F95CF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4411DC38-DEAB-41F6-96AD-4BD501F95CF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4411DC38-DEAB-41F6-96AD-4BD501F95CF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
