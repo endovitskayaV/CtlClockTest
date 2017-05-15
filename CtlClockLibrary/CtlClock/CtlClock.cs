@@ -12,13 +12,29 @@ namespace CtlClockLibrary
 {
     public partial class CtlClock: UserControl
     {
-        private enum ClockMode { Analog, Digital };
-        //private ClockMode mode = ClockMode.Digital;
+        public enum ClockMode { Analog, Digital };
+        private ClockMode mode = ClockMode.Analog;
         private WatchPatterns.TimeDecorator clock;
         private WatchPatterns.Watch watch;
         private Graphics graphics;
         private System.Timers.Timer timer;
         private bool drawing = false;
+
+        public ClockMode Mode
+        {
+            get
+            {
+                return mode;
+            }
+            set
+            {
+                mode = value;
+                // вызов метода обновления формы
+                // приведет к вызову метода перерисовки OnPaint;
+                // вызывать OnPaint напрямую неправильно !!!
+                Invalidate();
+            }
+        }
 
 
         public CtlClock()
@@ -29,7 +45,6 @@ namespace CtlClockLibrary
             clock = new WatchPatterns.DigitalTimeDecorator();
             clock.SetWatch(watch);
             graphics = pictureBox.CreateGraphics();
-           // changeModeBtn.Text = "Analog"; // изменить гдн-то это
 
             timer = new System.Timers.Timer();
             timer.Interval = 1000;
@@ -44,18 +59,13 @@ namespace CtlClockLibrary
             Draw();
         }
 
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            //пустой, чтобы вся логика была в OnPaint, чтобы не было мерцания
+        }
 
         protected override void OnPaint(PaintEventArgs cl)
         {
-            // в конце блока using для pen будет вызван Dispose
-            /*using (Pen pen = new Pen(Color.Black))
-            {
-                pe.Graphics.DrawLine(pen, 0, 0, Width - 1, Height - 1);
-                pe.Graphics.DrawLine(pen, Width - 1, 0, 0, Height - 1);
-            }*/
-
-
-            // cl.Graphics.DrawString(DateTime.Now.ToString("hh':'mm':'ss"), new Font(new FontFamily("Times New Roman"), 30), new SolidBrush(Color.Blue), 0, 50);
             Draw();
             base.OnPaint(cl);
         }
@@ -65,6 +75,8 @@ namespace CtlClockLibrary
             if (!drawing)
             {
                 drawing = true;
+                if (mode.Equals(ClockMode.Analog)) clock = new WatchPatterns.AnologTimeDecorator();
+                else clock = new WatchPatterns.DigitalTimeDecorator();
                 clock.SetWatch(watch);
                 graphics.Clear(Color.White);
                 clock.Draw(graphics);
