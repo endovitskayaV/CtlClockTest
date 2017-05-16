@@ -19,7 +19,7 @@ namespace WatchPatterns
             else max = size.Width;
 
             if (size.Height.Equals(size.Width)) max = size.Height;// любое вообще
-            Size pictureSize = new Size(max, max);
+            Size pictureSize = new Size(max, max); //картинка будет максимального размера, равная размеру макс стороны
 
             //получить  сборку, которая сожержит выполняемый в данный момент код
             //загрузить указанный ресурс из сборки

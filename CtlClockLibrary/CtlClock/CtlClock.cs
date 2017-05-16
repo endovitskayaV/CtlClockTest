@@ -24,7 +24,7 @@ namespace CtlClockLibrary
 
         [Category("Внешний вид")]
         [Description("Тип представления часов")]
-        [DefaultValue(ClockMode.Digital)]
+        [DefaultValue(ClockMode.Analog)]
         public ClockMode Mode
         {
             get
@@ -60,8 +60,8 @@ namespace CtlClockLibrary
         protected override void OnSizeChanged(EventArgs e)
         {
             pictureBox.Size = this.Size;
-            //Invalidate();
-            Refresh();
+           Invalidate();
+           // Refresh();
             base.OnSizeChanged(e);
         }
         
@@ -110,10 +110,6 @@ namespace CtlClockLibrary
                 clock.Draw(this.Size,graphics);
                 isDrawing = false;
             }
-           
         }
-
-        
-
     }
 }
