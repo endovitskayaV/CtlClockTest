@@ -34,9 +34,9 @@
             // ctlClock1
             // 
             this.ctlClock1.BackColor = System.Drawing.Color.White;
-            this.ctlClock1.Location = new System.Drawing.Point(41, 46);
+            this.ctlClock1.Location = new System.Drawing.Point(24, 24);
             this.ctlClock1.Name = "ctlClock1";
-            this.ctlClock1.Size = new System.Drawing.Size(206, 163);
+            this.ctlClock1.Size = new System.Drawing.Size(153, 143);
             this.ctlClock1.TabIndex = 0;
             // 
             // Form1

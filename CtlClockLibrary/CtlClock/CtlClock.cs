@@ -14,7 +14,7 @@ namespace CtlClockLibrary
     {
         private WatchPatterns.TimeDecorator clock;
         private WatchPatterns.Watch watch;
-        private Graphics graphics;
+       // private Graphics graphics;
         private System.Timers.Timer timer;
         private bool isDrawing = false;
 
@@ -57,14 +57,7 @@ namespace CtlClockLibrary
                 Invalidate();
             }
         }
-        protected override void OnSizeChanged(EventArgs e)
-        {
-            pictureBox.Size = this.Size;
-           Invalidate();
-           // Refresh();
-            base.OnSizeChanged(e);
-        }
-        
+      
         public CtlClock()
         {
             InitializeComponent();
@@ -72,7 +65,7 @@ namespace CtlClockLibrary
             watch = new WatchPatterns.Watch();
             clock = new WatchPatterns.DigitalTimeDecorator();
             clock.SetWatch(watch);
-            graphics = pictureBox.CreateGraphics();
+           // graphics = pictureBox.CreateGraphics();
 
             timer = new System.Timers.Timer();
             timer.Interval = 1000;
@@ -82,9 +75,17 @@ namespace CtlClockLibrary
             timer.Start();
         }
 
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            pictureBox.Size = this.Size;
+            base.OnSizeChanged(e);
+            Refresh();
+        }
+
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            Draw();
+            Draw(pictureBox.CreateGraphics());
+           
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -94,11 +95,11 @@ namespace CtlClockLibrary
 
         protected override void OnPaint(PaintEventArgs cl)
         {
-            Draw ();
+            Draw (cl.Graphics);
             base.OnPaint(cl);
         }
 
-        private void Draw()
+        private void Draw(Graphics graphics)
         {
             if (!isDrawing) // if isDrawing==false // если не рисуется, то можно рисовать
             {
