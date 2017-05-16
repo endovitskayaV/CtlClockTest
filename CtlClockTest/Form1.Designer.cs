@@ -34,19 +34,18 @@
             // ctlClock1
             // 
             this.ctlClock1.BackColor = System.Drawing.Color.White;
-            this.ctlClock1.Location = new System.Drawing.Point(44, 50);
+            this.ctlClock1.Location = new System.Drawing.Point(104, 44);
+            this.ctlClock1.Mode = CtlClockLibrary.CtlClock.ClockMode.Analog;
             this.ctlClock1.Name = "ctlClock1";
-            this.ctlClock1.Size = new System.Drawing.Size(285, 196);
-            this.ctlClock1.Stopped = true;
+            this.ctlClock1.Size = new System.Drawing.Size(184, 142);
             this.ctlClock1.TabIndex = 0;
-            this.ctlClock1.TimeOffset = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(372, 343);
+            this.ClientSize = new System.Drawing.Size(456, 418);
             this.Controls.Add(this.ctlClock1);
             this.Name = "Form1";
             this.Text = "Form1";

@@ -15,7 +15,7 @@ namespace WatchPatterns
         {
             
         }
-        public override void Draw(Graphics graphTime)
+        public override void Draw(Size size, Graphics graphTime)
         {
            
         }

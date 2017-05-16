@@ -18,11 +18,9 @@ namespace CtlClockLibrary
         private System.Timers.Timer timer;
         private bool isDrawing = false;
 
-        public enum ClockMode {Digital,Analog};
+        public enum ClockMode {Analog, Digital};
         private ClockMode mode;
         private int timeOffset;
-        private bool stopped;
-        private Color bgColor;
 
         [Category("Внешний вид")]
         [Description("Тип представления часов")]
@@ -45,7 +43,7 @@ namespace CtlClockLibrary
 
         [Category("Поведение")]
         [Description("Смещение для отображаемого времени относительно системного")]
-        [DefaultValue(3)]
+        [DefaultValue(0)]
         public int TimeOffset
         {
             get
@@ -59,42 +57,14 @@ namespace CtlClockLibrary
                 Invalidate();
             }
         }
-        [Category("Поведение")]
-        [Description("Остановлен ли элемент")]
-        [DefaultValue(false)]
-        public bool Stopped
+        protected override void OnSizeChanged(EventArgs e)
         {
-            get
-            {
-                return stopped;
-            }
-            set
-            {
-               stopped = value;
-               isDrawing = value;
-                if (value) timer.Stop(); else timer.Start();
-            }
+            pictureBox.Size = this.Size;
+            //Invalidate();
+            Refresh();
+            base.OnSizeChanged(e);
         }
-
-
-       // private const Color color = Color.Yellow;
-        [Category("Внешний вид")]
-        [Description("Фоновый цвет компонента")]
-        //[DefaultValue (color)]
-
-        public new Color BackColor
-        {
-            get
-            {
-                return base.BackColor;
-            }
-            set
-            {
-                base.BackColor = value;
-                bgColor = value;
-            }
-        }
-
+        
         public CtlClock()
         {
             InitializeComponent();
@@ -125,7 +95,7 @@ namespace CtlClockLibrary
         protected override void OnPaint(PaintEventArgs cl)
         {
             Draw ();
-           // base.OnPaint(cl);
+            base.OnPaint(cl);
         }
 
         private void Draw()
@@ -136,18 +106,11 @@ namespace CtlClockLibrary
                 if (mode.Equals(ClockMode.Analog)) clock = new WatchPatterns.AnologTimeDecorator();
                 else clock = new WatchPatterns.DigitalTimeDecorator();
                 clock.SetWatch(watch);
-                graphics.Clear(bgColor);
-                clock.Draw(graphics);
+                graphics.Clear(Color.White);
+                clock.Draw(this.Size,graphics);
                 isDrawing = false;
             }
-            if (stopped)
-            {
-                if (mode.Equals(ClockMode.Analog)) clock = new WatchPatterns.AnologTimeDecorator();
-                else clock = new WatchPatterns.DigitalTimeDecorator();
-                clock.SetWatch(watch);
-                graphics.Clear(bgColor);
-                clock.Draw(graphics);
-            }
+           
         }
 
         

@@ -34,6 +34,6 @@ namespace WatchPatterns
         }
 
        
-        public abstract void Draw(Graphics graphTime);
+        public abstract void Draw(Size size,Graphics graphTime);
     }
 }
