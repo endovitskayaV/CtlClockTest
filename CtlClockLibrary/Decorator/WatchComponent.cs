@@ -10,30 +10,38 @@ namespace WatchPatterns
 {
     public abstract class WatchComponent
     {
-        private TimeSpan time;
-        private TimeSpan timeOffset;
+        private int timeOffset;
 
-        public  WatchComponent()
+        public  WatchComponent(int timeOffset)
         {
-            timeOffset = new TimeSpan(0, 0, 0);
+            this.timeOffset = timeOffset;
+        }
+
+        public WatchComponent()
+        {
+            this.timeOffset = 0;
         }
 
         public TimeSpan Time
         {
             get
             {
-                return DateTime.Now.TimeOfDay.Add(timeOffset);
-            }
-
-            set
-            {
-                time = DateTime.Now.TimeOfDay.Add(value);
-                timeOffset = value;
-
+                return DateTime.Now.TimeOfDay.Add(new TimeSpan (timeOffset,0,0)); 
             }
         }
 
-       
+        public int TimeOffset
+        {
+            get
+            {
+                return timeOffset;
+            }
+            set
+            {
+                timeOffset = value;
+            }
+        }
+
         public abstract void Draw(Size size,Graphics graphTime);
     }
 }

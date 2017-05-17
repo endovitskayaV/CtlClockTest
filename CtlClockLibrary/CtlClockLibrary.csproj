@@ -47,13 +47,13 @@
     <Compile Include="CtlClock\CtlClock.Designer.cs">
       <DependentUpon>CtlClock.cs</DependentUpon>
     </Compile>
-    <Compile Include="CtlClock\WatchPatternsWatch.cs" />
     <Compile Include="Decorator\AnalogTimeDecorator.cs" />
     <Compile Include="Decorator\DigitalTimeDecorator.cs" />
     <Compile Include="Decorator\TimeDecorator.cs" />
     <Compile Include="Decorator\WatchComponent.cs" />
+    <Compile Include="MathUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Watch.cs" />
+    <Compile Include="Decorator\Watch.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
@@ -62,7 +62,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="clock.jpg" />
+    <EmbeddedResource Include="Decorator\clock.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

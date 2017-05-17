@@ -9,10 +9,16 @@ using System.Timers;
 namespace WatchPatterns
 {
     public abstract class TimeDecorator : WatchComponent
-    {
-        protected WatchComponent watch;
+    { 
+        public WatchComponent watch; //это. я сделала тольо потому что по схеме так. покажи схему
 
-        public void SetWatch(WatchComponent w)
+        public new TimeSpan Time
+        {
+            get { return watch.Time;  }
+        }
+
+
+        public void SetWatch(WatchComponent w) 
         {
             this.watch = w;
         }

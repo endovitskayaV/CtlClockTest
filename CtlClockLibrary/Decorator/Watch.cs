@@ -10,11 +10,16 @@ namespace WatchPatterns
 {
     public class Watch : WatchComponent
     {
-
-        public Watch()
+        public Watch(int timeOffset) : base(timeOffset)
         {
-            
+            //base-наследование действий родителя
         }
+
+        public Watch() : base() 
+        {
+
+        }
+
         public override void Draw(Size size, Graphics graphTime)
         {
            

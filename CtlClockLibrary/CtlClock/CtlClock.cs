@@ -12,13 +12,11 @@ namespace CtlClockLibrary
 {
     public partial class CtlClock: UserControl
     {
-        private WatchPatterns.TimeDecorator clock;
-        private WatchPatterns.Watch watch;
-       // private Graphics graphics;
-        private System.Timers.Timer timer;
-        private bool isDrawing = false;
-
         public enum ClockMode {Analog, Digital};
+        private WatchPatterns.TimeDecorator watchDecorator;
+        private WatchPatterns.Watch watch;
+        private System.Timers.Timer timer;
+        private bool isDrawing = false;       
         private ClockMode mode;
         private int timeOffset;
 
@@ -34,10 +32,7 @@ namespace CtlClockLibrary
             set
             {
                 mode = value;
-                // вызов метода обновления формы
-                // приведет к вызову метода перерисовки OnPaint;
-                // вызывать OnPaint напрямую неправильно !!!
-                Invalidate();
+                Invalidate(); // приведет к вызову метода перерисовки OnPaint;
             }
         }
 
@@ -52,8 +47,8 @@ namespace CtlClockLibrary
             }
             set
             {
-                timeOffset = value;
-                watch.Time = new TimeSpan(value, 0, 0);
+                timeOffset = value; 
+                watch.TimeOffset = timeOffset;
                 Invalidate();
             }
         }
@@ -62,10 +57,14 @@ namespace CtlClockLibrary
         {
             InitializeComponent();
 
-            watch = new WatchPatterns.Watch();
-            clock = new WatchPatterns.DigitalTimeDecorator();
-            clock.SetWatch(watch);
-           // graphics = pictureBox.CreateGraphics();
+            this.DoubleBuffered = true;
+
+            mode = ClockMode.Analog;
+            timeOffset = 0;
+            
+           watch = new WatchPatterns.Watch(timeOffset);
+            watchDecorator = new WatchPatterns.DigitalTimeDecorator(); 
+           watchDecorator.SetWatch(watch);
 
             timer = new System.Timers.Timer();
             timer.Interval = 1000;
@@ -79,24 +78,18 @@ namespace CtlClockLibrary
         {
             pictureBox.Size = this.Size;
             base.OnSizeChanged(e);
-            Refresh();
+            Invalidate();
         }
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             Draw(pictureBox.CreateGraphics());
-           
         }
 
-        protected override void OnPaintBackground(PaintEventArgs e)
+        protected override void OnPaint(PaintEventArgs e)
         {
-            //пустой, чтобы вся логика была в OnPaint, чтобы не было мерцания
-        }
-
-        protected override void OnPaint(PaintEventArgs cl)
-        {
-            Draw (cl.Graphics);
-            base.OnPaint(cl);
+            Draw (e.Graphics);
+            base.OnPaint(e);
         }
 
         private void Draw(Graphics graphics)
@@ -104,11 +97,15 @@ namespace CtlClockLibrary
             if (!isDrawing) // if isDrawing==false // если не рисуется, то можно рисовать
             {
                 isDrawing = true;
-                if (mode.Equals(ClockMode.Analog)) clock = new WatchPatterns.AnologTimeDecorator();
-                else clock = new WatchPatterns.DigitalTimeDecorator();
-                clock.SetWatch(watch);
+
+                if (mode.Equals(ClockMode.Analog))
+                    watchDecorator = new WatchPatterns.AnologTimeDecorator();
+                else watchDecorator = new WatchPatterns.DigitalTimeDecorator();
+
+                watchDecorator.SetWatch(watch);
                 graphics.Clear(Color.White);
-                clock.Draw(this.Size,graphics);
+                watchDecorator.Draw(this.Size,graphics);
+
                 isDrawing = false;
             }
         }

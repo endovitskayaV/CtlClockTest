@@ -11,36 +11,94 @@ namespace WatchPatterns
 {
     class AnologTimeDecorator : TimeDecorator
     {
-        public override void Draw(Size size,Graphics graphTime)
+        private Size bitmapSize;
+
+        public override void Draw(Size controlSize, Graphics graphicsTime)
         {
-            int max;
-            if (size.Height > size.Width)
-                max = size.Height;
-            else max = size.Width;
+            SetBitmapSize(controlSize);
+            Bitmap bitmap = 
+                new Bitmap(Assembly.GetExecutingAssembly().GetManifestResourceStream
+                                                          ("CtlClockLibrary.Decorator.clock.jpg"));
+            //нарисовать циферблат размера bitmapSize:
+            //вот, например, зачем тебе объект watch
+            //если декоратор (здесь) и есть наследник не нужен
+            // я думала. может wacth класс совсем удалить? оставь. но
+            graphicsTime.DrawImage(bitmap, 0, 0, bitmapSize.Width, bitmapSize.Height); 
+            bitmap = new Bitmap(bitmapSize.Width, bitmapSize.Height); // новый bitmap размера bitmapSize
+            DrawArrows(graphicsTime);
+            graphicsTime.DrawImage(bitmap, 0, 0);
+        }
 
-            if (size.Height.Equals(size.Width)) max = size.Height;// любое вообще
-            Size pictureSize = new Size(max, max); //картинка будет максимального размера, равная размеру макс стороны
+        private void SetBitmapSize(Size controlSize)
+        {
+            int maxLengthSide;
+            if (controlSize.Height > controlSize.Width)
+                maxLengthSide = controlSize.Height;
+            else maxLengthSide = controlSize.Width;
+            if (controlSize.Height.Equals(controlSize.Width)) maxLengthSide = controlSize.Height;//любое вообще, т к равны
 
-            //получить  сборку, которая сожержит выполняемый в данный момент код
-            //загрузить указанный ресурс из сборки
-            //создать bitmap из этого потока данных
-            Bitmap bitmap = new Bitmap(Assembly.GetExecutingAssembly().GetManifestResourceStream("CtlClockLibrary.clock.jpg"));
-            graphTime.DrawImage(bitmap, 0, 0, pictureSize.Width, pictureSize.Height);
-            bitmap = new Bitmap(pictureSize.Width, pictureSize.Height);
-            Graphics grBuffer = Graphics.FromImage(bitmap);
-            float center = pictureSize.Height / 2;
-          
-           double length= (pictureSize.Width / 2)*0.9;
-            grBuffer.DrawLine(new Pen(Brushes.Black, 1), center, center, (float)(length* Math.Sin(this.Time.Seconds * 6 * (Math.PI / 180)) + center), (float)(length * Math.Cos(this.Time.Seconds * 6 * (Math.PI / 180)) * (-1) + center));
-            length = (pictureSize.Width / 2) * 0.85;
-            grBuffer.DrawLine(new Pen(Brushes.Black, 2),center, center, (float)(length * Math.Sin((this.Time.Minutes+ this.Time.Seconds / 60.0 )* 6* (Math.PI / 180)) +center), (float)(60 * Math.Cos((this.Time.Minutes +this.Time.Seconds/60.0)* 6 * (Math.PI / 180)) * (-1) + center));
+            bitmapSize=new Size(maxLengthSide, maxLengthSide);
+            //картинка будет максимального размера, равная размеру макс стороны
+        }
+
+        private void DrawArrows(Graphics graphics)
+        {
+            float clockCenterCoord = bitmapSize.Height / 2;
+            double halfDialSize = bitmapSize.Width / 2;
+            //sec
+            double arrowLength = halfDialSize * 0.9;
+            graphics.DrawLine(new Pen(Brushes.Black, 1),
+                clockCenterCoord, clockCenterCoord, 
+                X(SecRotationAngle(),arrowLength,clockCenterCoord), Y(SecRotationAngle(),arrowLength,clockCenterCoord));
+            //min
+            arrowLength = halfDialSize * 0.9 * 5 / 6;
+            graphics.DrawLine(new Pen(Brushes.Black, 2), 
+                clockCenterCoord, clockCenterCoord,
+                X(MinRotationAngle(),arrowLength, clockCenterCoord), Y(MinRotationAngle(),arrowLength, clockCenterCoord));
+            //hour
+            double hour = ShortenHoursFormat();    
+            arrowLength = halfDialSize * 0.9 * 0.5;
+
+            int thickness;
+            if (bitmapSize.Height < 150) thickness = 2;
+            else thickness = 3;
+
+            graphics.DrawLine(new Pen(Brushes.Black, thickness), 
+                clockCenterCoord, clockCenterCoord, 
+                X(HourRotationAngle(hour), arrowLength, clockCenterCoord), Y(HourRotationAngle(hour), arrowLength, clockCenterCoord));
+        }
+
+        private double SecRotationAngle()
+        {
+            return this.Time.Seconds * MathUtilsLib.MathUtils.GradToRadian(6); // 6 градусов поворота за 1 сек
+        }
+
+        private double MinRotationAngle()
+        {
+            return (this.Time.Minutes + this.Time.Seconds / 60.0) * MathUtilsLib.MathUtils.GradToRadian(6);
+        }
+
+        private double HourRotationAngle(double hour)
+        {
+            //30 градусов = 6 градусов* 5 делений в часе
+            return (hour + this.Time.Minutes / 60.0) * MathUtilsLib.MathUtils.GradToRadian(30); 
+        }
+
+        private double ShortenHoursFormat()
+        {
             double h = (this.Time.Hours);
-            if (h > 12)  h -= 12;
-            h = (h+ this.Time.Minutes / 60.0)*30*(Math.PI / 180);
-            length = (pictureSize.Width / 2) * 0.55;
-            grBuffer.DrawLine(new Pen(Brushes.Black, 3), center, center, (float)(length * Math.Sin(h) +center), (float)(35* Math.Cos(h)*(-1)  + center));
-            graphTime.DrawImage(bitmap, 0, 0);
-            grBuffer.Dispose();
+            if (h > 12) h -= 12; //к 12 часовому формау времени
+            return h;
+        }
+
+        private float X(double rotationAngle, double arrowLength, float clockCenterCoord)
+        {
+            return (float)(arrowLength * Math.Sin(rotationAngle) + clockCenterCoord);
+        }
+
+        private float Y(double rotationAngle, double arrowLength, float clockCenterCoord)
+        {
+            return (float)(arrowLength * Math.Cos(rotationAngle) * (-1) + clockCenterCoord);
         }
     }
 }
