@@ -63,7 +63,7 @@ namespace CtlClockLibrary
             timeOffset = 0;
             
            watch = new WatchPatterns.Watch(timeOffset);
-            watchDecorator = new WatchPatterns.DigitalTimeDecorator(); 
+            watchDecorator = new WatchPatterns.DigitalTimeDecorator();  
            watchDecorator.SetWatch(watch);
 
             timer = new System.Timers.Timer();
