@@ -20,9 +20,9 @@ namespace CtlClockTest
         private void button1_Click(object sender, EventArgs e)
         {
             ctlClock1.TimeOffset = 3;
-           // ctlClock2.Mode = CtlClockLibrary.CtlClock.ClockMode.Digital;
-           // ctlClock3.Size = new Size(100,100);
-           // ctlClock4.Size = new Size(50, 50);
+            ctlClock2.Mode = CtlClockLibrary.CtlClock.ClockMode.Digital;
+            ctlClock3.Size = new Size(100,100);
+            ctlClock4.Size = new Size(50, 50);
         }
     }
 }

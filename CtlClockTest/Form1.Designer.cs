@@ -33,6 +33,10 @@
             this.ctlClock2 = new CtlClockLibrary.CtlClock();
             this.ctlClock3 = new CtlClockLibrary.CtlClock();
             this.ctlClock4 = new CtlClockLibrary.CtlClock();
+            ((System.ComponentModel.ISupportInitialize)(this.ctlClock1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ctlClock2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ctlClock3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ctlClock4)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -48,35 +52,39 @@
             // ctlClock1
             // 
             this.ctlClock1.BackColor = System.Drawing.Color.White;
-            this.ctlClock1.Location = new System.Drawing.Point(12, 12);
+            this.ctlClock1.Location = new System.Drawing.Point(51, 12);
             this.ctlClock1.Name = "ctlClock1";
             this.ctlClock1.Size = new System.Drawing.Size(174, 174);
             this.ctlClock1.TabIndex = 4;
+            this.ctlClock1.TabStop = false;
             // 
             // ctlClock2
             // 
             this.ctlClock2.BackColor = System.Drawing.Color.White;
-            this.ctlClock2.Location = new System.Drawing.Point(253, 25);
+            this.ctlClock2.Location = new System.Drawing.Point(247, 12);
             this.ctlClock2.Name = "ctlClock2";
             this.ctlClock2.Size = new System.Drawing.Size(174, 174);
             this.ctlClock2.TabIndex = 5;
+            this.ctlClock2.TabStop = false;
             // 
             // ctlClock3
             // 
             this.ctlClock3.BackColor = System.Drawing.Color.White;
-            this.ctlClock3.Location = new System.Drawing.Point(457, 25);
+            this.ctlClock3.Location = new System.Drawing.Point(427, 12);
             this.ctlClock3.Name = "ctlClock3";
             this.ctlClock3.Size = new System.Drawing.Size(174, 174);
             this.ctlClock3.TabIndex = 6;
+            this.ctlClock3.TabStop = false;
             // 
             // ctlClock4
             // 
             this.ctlClock4.BackColor = System.Drawing.Color.White;
-            this.ctlClock4.Location = new System.Drawing.Point(665, 126);
+            this.ctlClock4.Location = new System.Drawing.Point(607, 12);
             this.ctlClock4.Mode = CtlClockLibrary.CtlClock.ClockMode.Digital;
             this.ctlClock4.Name = "ctlClock4";
             this.ctlClock4.Size = new System.Drawing.Size(174, 174);
             this.ctlClock4.TabIndex = 7;
+            this.ctlClock4.TabStop = false;
             // 
             // Form1
             // 
@@ -91,6 +99,10 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.ctlClock1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ctlClock2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ctlClock3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ctlClock4)).EndInit();
             this.ResumeLayout(false);
 
         }

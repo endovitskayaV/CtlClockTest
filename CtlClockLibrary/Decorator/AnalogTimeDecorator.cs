@@ -12,21 +12,23 @@ namespace WatchPatterns
     class AnologTimeDecorator : TimeDecorator
     {
         private Size bitmapSize;
+        private Bitmap bitmap;
 
         public override void Draw(Size controlSize, Graphics graphicsTime)
         {
             SetBitmapSize(controlSize);
-            Bitmap bitmap = 
+            if (bitmap==null)
+
+            bitmap = 
                 new Bitmap(Assembly.GetExecutingAssembly().GetManifestResourceStream
                                                           ("CtlClockLibrary.Decorator.clock.jpg"));
             //нарисовать циферблат размера bitmapSize:
-            //вот, например, зачем тебе объект watch
-            //если декоратор (здесь) и есть наследник не нужен
-            // я думала. может wacth класс совсем удалить? оставь. но
-            graphicsTime.DrawImage(bitmap, 0, 0, bitmapSize.Width, bitmapSize.Height); 
-            bitmap = new Bitmap(bitmapSize.Width, bitmapSize.Height); // новый bitmap размера bitmapSize
+            // graphicsTime.DrawImage(bitmap, 0, 0, bitmapSize.Width, bitmapSize.Height); 
+            // bitmap = new Bitmap(bitmapSize.Width, bitmapSize.Height); // новый bitmap размера bitmapSize
+
+            
+            graphicsTime.DrawImage(bitmap, 0, 0, bitmapSize.Width, bitmapSize.Height);
             DrawArrows(graphicsTime);
-            graphicsTime.DrawImage(bitmap, 0, 0);
         }
 
         private void SetBitmapSize(Size controlSize)

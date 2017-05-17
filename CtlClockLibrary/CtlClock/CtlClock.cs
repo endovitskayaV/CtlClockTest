@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace CtlClockLibrary
 {
-    public partial class CtlClock: UserControl
+    public partial class CtlClock: PictureBox
     {
         public enum ClockMode {Analog, Digital};
         private WatchPatterns.TimeDecorator watchDecorator;
@@ -57,14 +57,12 @@ namespace CtlClockLibrary
         {
             InitializeComponent();
 
-            this.DoubleBuffered = true;
-
             mode = ClockMode.Analog;
             timeOffset = 0;
             
-           watch = new WatchPatterns.Watch(timeOffset);
+            watch = new WatchPatterns.Watch(timeOffset);
             watchDecorator = new WatchPatterns.DigitalTimeDecorator();  
-           watchDecorator.SetWatch(watch);
+            watchDecorator.SetWatch(watch);
 
             timer = new System.Timers.Timer();
             timer.Interval = 1000;
@@ -76,14 +74,13 @@ namespace CtlClockLibrary
 
         protected override void OnSizeChanged(EventArgs e)
         {
-            pictureBox.Size = this.Size;
             base.OnSizeChanged(e);
             Invalidate();
         }
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            Draw(pictureBox.CreateGraphics());
+            Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
