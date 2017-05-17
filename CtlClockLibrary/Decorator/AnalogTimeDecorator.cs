@@ -22,11 +22,7 @@ namespace WatchPatterns
             bitmap = 
                 new Bitmap(Assembly.GetExecutingAssembly().GetManifestResourceStream
                                                           ("CtlClockLibrary.Decorator.clock.jpg"));
-            //нарисовать циферблат размера bitmapSize:
-            // graphicsTime.DrawImage(bitmap, 0, 0, bitmapSize.Width, bitmapSize.Height); 
-            // bitmap = new Bitmap(bitmapSize.Width, bitmapSize.Height); // новый bitmap размера bitmapSize
-
-            
+            //нарисовать циферблат размера bitmapSize
             graphicsTime.DrawImage(bitmap, 0, 0, bitmapSize.Width, bitmapSize.Height);
             DrawArrows(graphicsTime);
         }
